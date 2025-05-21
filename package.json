@@ -1,3 +1,15 @@
+<<<<<<< HEAD
 "scripts": {
   "test": "echo Running test... && exit 0"
+=======
+{
+  "name": "smt4-uts-devops",
+  "version": "1.0.0",
+  "description": "UTS DevOps Project",
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0",
+    "build": "echo \"Build step placeholder\""
+  },
+  "dependencies": {}
+>>>>>>> a95ef5293a0d137ebbee703b7f5c91b0691a347d
 }
