@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Clone Repo') {
       steps {
-        git 'https://github.com/rizalamrirozaqi/smt4-uts-devops.git' 
+        git url: 'https://github.com/rizalamrirozaqi/smt4-uts-devops.git', branch: 'development'
       }
     }
 
