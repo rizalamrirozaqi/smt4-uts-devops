@@ -1,6 +1,10 @@
 pipeline {
-  agent any
-
+  agent {
+    docker {
+      image 'docker:24.0.7-dind'
+      args '--privileged'  
+    }
+    
   stages {
     stage('Clone Repo') {
       steps {
