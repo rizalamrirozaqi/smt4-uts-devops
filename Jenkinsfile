@@ -1,32 +1,36 @@
 pipeline {
-  agent any
-  
+  agent {
+    docker {
+      image 'node:18-alpine'
+    }
+  }
   stages {
-    stage('Clone Repo') {
+    stage('Checkout') {
       steps {
-        git url: 'https://github.com/rizalamrirozaqi/smt4-uts-devops.git', branch: 'development'
+        git(
+          url: 'https://github.com/rizalamrirozaqi/smt4-uts-devops.git',
+          branch: 'development'
+        )
       }
     }
 
-    stage('Build Docker Image') {
+    stage('Install') {
       steps {
-        sh 'docker build -t my-html-app .'
+        sh 'npm install'
       }
     }
 
-    stage('Login to Vercel') {
+    stage('Build') {
       steps {
-        withCredentials([string(credentialsId: 'vercel-token', variable: 'VERCEL_TOKEN')]) {
-          sh 'npm install -g vercel'
-          sh 'vercel login --token $VERCEL_TOKEN || true'
-        }
+        sh 'npm run build'
       }
     }
 
     stage('Deploy to Vercel') {
       steps {
         withCredentials([string(credentialsId: 'vercel-token', variable: 'VERCEL_TOKEN')]) {
-          sh 'vercel --prod --token $VERCEL_TOKEN --confirm'
+          sh 'npm install -g vercel'
+          sh 'vercel --prod --yes'
         }
       }
     }
