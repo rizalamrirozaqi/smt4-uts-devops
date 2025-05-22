@@ -9,8 +9,8 @@ pipeline {
             steps {
                 git(
                     url: 'https://github.com/rizalamrirozaqi/smt4-uts-devops.git',
-                    branch: 'main',
-                    credentialsId: 'github-token-rizal' // ganti dengan ID credentials kamu yang benar
+                    branch: 'development',
+                    credentialsId: 'vercel-token'
                 )
             }
         }
@@ -26,5 +26,14 @@ pipeline {
                 sh 'npm run build'
             }
         }
+
+      stage('Deploy to Vercel') {
+        steps {
+            withCredentials([string(credentialsId: 'vercel-token', variable: 'VERCEL_TOKEN')]) {
+                sh 'npm install -g vercel'
+                sh 'vercel --prod --token $VERCEL_TOKEN --yes'
+              }
+          }
+      }
     }
 }
