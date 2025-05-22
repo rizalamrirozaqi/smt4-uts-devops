@@ -30,7 +30,7 @@ pipeline {
       steps {
         withCredentials([string(credentialsId: 'vercel-token', variable: 'VERCEL_TOKEN')]) {
           sh 'npm install -g vercel'
-          sh 'vercel --prod --yes'
+          sh 'vercel --prod --yes --token $VERCEL_TOKEN'
         }
       }
     }
