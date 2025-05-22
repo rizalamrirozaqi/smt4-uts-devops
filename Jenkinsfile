@@ -30,7 +30,8 @@ pipeline {
       steps {
         withCredentials([string(credentialsId: 'vercel-token', variable: 'VERCEL_TOKEN')]) {
           sh 'npm install -g vercel'
-          sh 'vercel --prod --token $VERCEL_TOKEN --yes'
+          // deploy tanpa --token, Vercel CLI pakai env var VERCEL_TOKEN otomatis
+          sh 'vercel --prod --yes'
         }
       }
     }
