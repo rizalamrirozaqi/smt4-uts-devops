@@ -7,3 +7,7 @@ RUN apt-get update && \
     pip3 install pytest
 
 USER jenkins
+
+
+FROM nginx:alpine
+COPY demo.html /usr/share/nginx/html/demo.html
